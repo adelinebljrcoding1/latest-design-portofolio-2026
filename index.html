@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Alex Rivera, Product & UI Design</title>
+<title>Adeline Kusuma, Product & UI Design</title>
 <style>
   @font-face{
     font-family:'Lora';
@@ -239,6 +239,14 @@
   .footer-links a{opacity:0.75; transition:opacity .2s;}
   .footer-links a:hover{opacity:1; color:var(--accent);}
 
+  @media (min-width: 900px){
+    .work-rail{
+      display:grid; grid-template-columns:repeat(3, 1fr);
+      overflow-x:visible; scroll-snap-type:none;
+    }
+    .work-card{width:auto;}
+  }
+
   @media (max-width: 760px){
     header{padding:20px 22px;}
     nav{display:none;}
@@ -307,7 +315,6 @@
     <div>
       <h2>Featured works</h2>
     </div>
-    <span class="count">01 of 03</span>
   </div>
 
   <div class="work-rail">
@@ -324,7 +331,7 @@
         </div>
         <p class="work-desc">A split-view mapping experience that connects POS menu items to F&amp;B inventory recipes, with real-time validation.</p>
         <div class="work-specs">
-          <span>Year<b>2023 to 2024</b></span>
+          <span>Year<b>2024</b></span>
           <span>Platform<b>Desktop web</b></span>
         </div>
       </div>
