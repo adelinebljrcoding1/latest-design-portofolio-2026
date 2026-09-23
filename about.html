@@ -90,6 +90,31 @@
     letter-spacing:0.08em; border:1px solid currentColor; padding:8px 16px; border-radius:100px;
   }
 
+  /* ---------- MOBILE MENU ---------- */
+  .menu-toggle{
+    display:none; position:relative; width:26px; height:18px;
+    background:none; border:none; padding:0; cursor:pointer; z-index:210; color:var(--ink);
+  }
+  .menu-toggle span{
+    position:absolute; left:0; width:100%; height:1.5px; background:currentColor;
+    transition:top .25s ease, bottom .25s ease, transform .25s ease;
+  }
+  .menu-toggle span:first-child{top:0;}
+  .menu-toggle span:last-child{bottom:0;}
+  .menu-toggle.open span:first-child{top:8px; transform:rotate(45deg);}
+  .menu-toggle.open span:last-child{bottom:8px; transform:rotate(-45deg);}
+
+  .mobile-nav-overlay{
+    display:none; position:fixed; inset:0; background:#fff; z-index:90;
+    align-items:center; justify-content:center;
+  }
+  .mobile-nav-overlay.open{display:flex;}
+  .mobile-nav-overlay nav{display:flex; flex-direction:column; align-items:center; gap:32px;}
+  .mobile-nav-overlay a{
+    font-family:var(--font-display); font-weight:400; font-size:34px;
+    letter-spacing:-0.01em; color:#0b0b0d; opacity:1; text-transform:none;
+  }
+
   /* ---------- WRAP ---------- */
   .case{max-width:1220px; margin:0 auto; padding:0 48px;}
 
@@ -193,7 +218,8 @@
 
   @media (max-width: 760px){
     header{padding:20px 22px;}
-    nav{display:none;}
+    header nav{display:none;}
+    .menu-toggle{display:block;}
     .case-hero{padding:110px 22px 0;}
     .about-grid{padding:48px 22px 72px;}
     .case-section{padding:56px 22px;}
@@ -211,9 +237,44 @@
   <nav>
     <a href="index.html#work">Work</a>
     <a href="about.html">About</a>
-    <a href="mailto:adelinekusuma1@gmail.com">Contact</a>
   </nav>
+  <button class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobileNavOverlay">
+    <span></span><span></span>
+  </button>
 </header>
+
+<div class="mobile-nav-overlay" id="mobileNavOverlay">
+  <nav>
+    <a href="index.html#work">Work</a>
+    <a href="about.html">About</a>
+  </nav>
+</div>
+
+<script>
+(function(){
+  var btn = document.querySelector('.menu-toggle');
+  var overlay = document.getElementById('mobileNavOverlay');
+  if(!btn || !overlay) return;
+  function closeMenu(){
+    btn.classList.remove('open');
+    overlay.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+  }
+  function openMenu(){
+    btn.classList.add('open');
+    overlay.classList.add('open');
+    btn.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';
+  }
+  btn.addEventListener('click', function(){
+    if(overlay.classList.contains('open')) closeMenu(); else openMenu();
+  });
+  overlay.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeMenu);
+  });
+})();
+</script>
 
 <!-- ABOUT HERO -->
 <section class="case-hero case">
